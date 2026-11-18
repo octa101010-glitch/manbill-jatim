@@ -13,7 +13,7 @@ window.PORTAL_CONFIG = {
 
   // URL Web App APIK hasil Deploy (berakhiran /exec). Dipakai untuk membuka APIK
   // dan mengambil ringkasan, pengumuman, serta Buku Panduan.
-  apikUrl: "https://script.google.com/macros/s/GANTI_DENGAN_ID_DEPLOYMENT/exec",
+  apikUrl: "https://script.google.com/macros/s/AKfycbznQYPeTPP69sdv6k7mgob5RUvjS6gpmo-TpUN7VasUeIGzc3cS38uxAf8oAj5WM-LX/exec",
 
   // Tampilkan panel ringkasan APIK di halaman utama
   showSummary: true,
