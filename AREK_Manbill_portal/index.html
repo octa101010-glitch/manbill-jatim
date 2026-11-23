@@ -159,8 +159,45 @@
     .toast { position: fixed; left: 50%; bottom: 22px; transform: translate(-50%, 20px); opacity: 0; pointer-events: none; background: var(--ink); color: #fff; padding: 10px 16px; border-radius: 12px; font-size: 14px; max-width: calc(100vw - 32px); transition: opacity .2s, transform .2s; z-index: 50; }
     .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
+    /* ---------- Panel SLA Gabungan ---------- */
+    .slap { background: var(--surface); border-radius: 22px; padding: 16px; margin-bottom: 30px; box-shadow: 0 1px 2px rgba(14, 42, 59, .06); }
+    .slap[hidden] { display: none; }
+    .sla-totals { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 12px; }
+    .sla-total { background: #f4f7f9; border-radius: 12px; padding: 10px 14px; min-width: 0; }
+    .sla-total .k { font-size: 12.5px; color: var(--muted); }
+    .sla-total .v { font-size: 21px; font-weight: 800; letter-spacing: -.01em; font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .sla-total .v small { font-size: 13px; font-weight: 700; color: var(--muted); margin-right: 3px; }
+    .sla-body { display: grid; grid-template-columns: 170px 1fr 190px; gap: 12px; }
+    .sla-title { background: #0f7b83; color: #fff; border-radius: 14px; padding: 14px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; }
+    .sla-title h2 { margin: 0; font-size: 17px; font-weight: 800; line-height: 1.25; }
+    .sla-title a { color: #fff; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; gap: 6px; align-items: center; }
+    .sla-title a:hover { text-decoration: underline; }
+    .sla-months { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+    .sla-m { border-radius: 10px; padding: 7px 9px; background: #f4f7f9; min-width: 0; }
+    .sla-m .n { font-size: 12px; color: var(--muted); font-weight: 600; }
+    .sla-m .v { font-size: 17px; font-weight: 800; letter-spacing: -.01em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .sla-m .p { font-size: 11.5px; color: var(--muted); white-space: nowrap; }
+    .sla-m.good { background: #e7f6ee; } .sla-m.good .v { color: #14653f; }
+    .sla-m.bad { background: #fde8dc; } .sla-m.bad .v { color: #9a3412; }
+    .sla-m.none .v { color: #b0bcc7; }
+    .sla-m .up { color: var(--ok); } .sla-m .down { color: #c2410c; }
+    .sla-kom { background: var(--brand-deep); color: #fff; border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+    .sla-kom .k { font-size: 12px; color: #b8d6e4; }
+    .sla-kom .kv { font-size: 26px; font-weight: 800; font-variant-numeric: tabular-nums; }
+    .sla-kom .kv.prev { color: #8fd3dc; font-size: 22px; }
+    .sla-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 14px; font-size: 12px; color: var(--muted); margin-top: 8px; }
+    .sla-legend { display: flex; flex-wrap: wrap; gap: 12px; }
+    .sla-legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; background: var(--c); }
+    .slap.loading .sla-total .v, .slap.loading .sla-m .v, .slap.loading .sla-kom .kv { color: transparent; background: linear-gradient(90deg, #e6edf2, #f3f6f8, #e6edf2); background-size: 200% 100%; animation: shimmer 1.2s linear infinite; border-radius: 6px; }
+    .sla-msg { font-size: 13px; color: var(--muted); margin-top: 6px; display: none; }
+    .sla-msg button { background: none; border: 0; color: var(--brand); font: inherit; font-weight: 700; text-decoration: underline; cursor: pointer; padding: 0 0 0 4px; }
+
     /* ---------- Responsif ---------- */
     @media (max-width: 1080px) {
+      .sla-body { grid-template-columns: 1fr; }
+      .sla-title { flex-direction: row; align-items: center; }
+      .sla-kom { flex-direction: row; justify-content: space-around; }
+      .sla-totals { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .readouts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
@@ -183,6 +220,12 @@
       .readout:first-child { grid-column: 1 / -1; }
       .readout:first-child .lbl { min-height: 0; }
       .readout .sub { white-space: normal; }
+      .sla-months { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .sla-totals { grid-template-columns: 1fr; gap: 6px; }
+      .sla-total { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 8px 12px; }
+      .sla-total .v { font-size: 16px; }
+      .sla-title { flex-direction: column; align-items: flex-start; }
+      .sla-kom .kv { font-size: 22px; } .sla-kom .kv.prev { font-size: 19px; }
       .lcd.text { font-size: 16px; }
       footer { padding: 0 16px 24px; }
     }
@@ -225,6 +268,31 @@
         <div class="readout"><div class="lbl" id="rProcessedLbl">Diproses SDM bulan ini</div><div class="lcd" id="rProcessed">00</div><div class="sub" id="rProcessedSub">&nbsp;</div></div>
       </div>
       <div class="meter-msg" id="meterMsg"></div>
+    </section>
+
+    <section class="slap loading" id="slaPanel" aria-labelledby="slaTitle" hidden>
+      <div class="sla-totals">
+        <div class="sla-total"><div class="k">Total Kontrak</div><div class="v" id="slaKontrak">000.000.000</div></div>
+        <div class="sla-total"><div class="k">Total Tagihan</div><div class="v" id="slaTagihan">000.000.000</div></div>
+        <div class="sla-total"><div class="k">Total Reward</div><div class="v" id="slaReward">000.000.000</div></div>
+        <div class="sla-total"><div class="k">Total Denda</div><div class="v" id="slaDenda">000.000.000</div></div>
+      </div>
+      <div class="sla-body">
+        <div class="sla-title">
+          <h2 id="slaTitle">SLA Gabungan Manbill UP 3 Jatim</h2>
+          <a id="slaOpen" href="#" target="_blank" rel="noopener">Buka Dashboard SLA <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+        </div>
+        <div class="sla-months" id="slaMonths"></div>
+        <div class="sla-kom">
+          <div><div class="k" id="slaKomLbl">KOM TH</div><div class="kv" id="slaKom">000,00%</div></div>
+          <div><div class="k" id="slaKomPrevLbl">KOM TH</div><div class="kv prev" id="slaKomPrev">000,00%</div></div>
+        </div>
+      </div>
+      <div class="sla-foot">
+        <div class="sla-legend"><span style="--c:#bfe8d1">Tercapai ≥ 100%</span><span style="--c:#f9c9ad">Di bawah 100%</span><span style="--c:#e2e8ee">Belum ada data</span></div>
+        <span id="slaNote">Angka kecil = bulan yang sama tahun lalu</span>
+      </div>
+      <div class="sla-msg" id="slaMsg"></div>
     </section>
 
     <section aria-labelledby="appsTitle">
@@ -310,17 +378,21 @@
     }
 
     /* ---------- JSONP ke APIK ---------- */
-    function jsonp(params, timeoutMs) {
+    // JSONP ke APIK. Bila lewat batas waktu, jawaban yang datang terlambat tetap diterima lewat onLate.
+    function jsonp(params, timeoutMs, onLate, baseUrl) {
       return new Promise((resolve, reject) => {
-        if (!apiReady) return reject(new Error('URL APIK belum diisi di config.js'));
+        const base = baseUrl || C.apikUrl;
+        const who = baseUrl ? 'Dashboard SLA' : 'APIK';
+        if (!baseUrl && !apiReady) return reject(new Error('URL APIK belum diisi di config.js'));
         const cb = '__hub' + Date.now() + Math.floor(Math.random() * 1000);
         const s = document.createElement('script');
-        const timer = setTimeout(() => { cleanup(); reject(new Error('APIK tidak merespons')); }, timeoutMs || 15000);
+        let timedOut = false;
+        const timer = setTimeout(() => { timedOut = true; reject(new Error(who + ' belum merespons')); }, timeoutMs || 30000);
         function cleanup() { clearTimeout(timer); delete window[cb]; s.remove(); }
-        window[cb] = data => { cleanup(); resolve(data); };
-        s.onerror = () => { cleanup(); reject(new Error('APIK tidak dapat dihubungi')); };
+        window[cb] = data => { cleanup(); if (timedOut) { if (onLate) onLate(data); } else resolve(data); };
+        s.onerror = () => { cleanup(); if (!timedOut) reject(new Error(who + ' tidak dapat dihubungi')); };
         const q = Object.keys(params).map(k => k + '=' + encodeURIComponent(params[k])).join('&');
-        s.src = C.apikUrl + (C.apikUrl.indexOf('?') === -1 ? '?' : '&') + q + '&callback=' + cb;
+        s.src = base + (base.indexOf('?') === -1 ? '?' : '&') + q + '&callback=' + cb;
         document.body.appendChild(s);
       });
     }
@@ -470,25 +542,127 @@
       $('meterMsg').style.display = 'block';
     }
 
-    function loadSummary(refresh) {
-      if (C.showSummary === false) { $('meter').style.display = 'none'; }
-      else { $('meter').classList.add('loading'); $('meterSrc').textContent = 'Mengambil data dari APIK...'; }
-      jsonp(refresh ? { api: 'portal', refresh: 1 } : { api: 'portal' }).then(d => {
+    // Data terakhir disimpan di browser agar halaman langsung terisi saat dibuka kembali
+    const CACHE_KEY = 'arekPortalData';
+    function readCache() { try { return JSON.parse(localStorage.getItem(CACHE_KEY) || 'null'); } catch (e) { return null; } }
+    function writeCache(d) { try { localStorage.setItem(CACHE_KEY, JSON.stringify(d)); } catch (e) {} }
+
+    function applyData(d) {
+      if (Array.isArray(d.apps) && d.apps.length) { apps = d.apps; renderChips(); renderApps(); }
+      if (C.showSummary !== false) renderSummary(d);
+      renderNews(d.news);
+      renderHelp(d.guide);
+    }
+
+    let loadSeq = 0;
+    function loadSummary(refresh, attempt) {
+      const seq = ++loadSeq;
+      const tryNo = attempt || 1;
+      const filled = () => $('meter').dataset.filled === '1';
+      if (C.showSummary === false) $('meter').style.display = 'none';
+      else if (!filled()) { $('meter').classList.add('loading'); $('meterSrc').textContent = 'Mengambil data dari APIK...'; }
+      else $('meterSrc').textContent = 'Menyegarkan data dari APIK...';
+      const ok = d => {
         if (!d || !d.success) throw new Error(d && d.message ? d.message : 'respons tidak valid');
-        if (Array.isArray(d.apps) && d.apps.length) { apps = d.apps; renderChips(); renderApps(); }
-        if (C.showSummary !== false) renderSummary(d);
-        renderNews(d.news);
-        renderHelp(d.guide);
-      }).catch(err => {
-        if (C.showSummary !== false) summaryFailed(err.message);
-        renderNews(null, true);
+        writeCache(d);
+        $('meter').dataset.filled = '1';
+        applyData(d);
+      };
+      // Jawaban terlambat (APIK lambat "bangun") tetap ditampilkan
+      jsonp(refresh ? { api: 'portal', refresh: 1 } : { api: 'portal' }, 30000, d => { try { ok(d); } catch (e) {} })
+        .then(ok)
+        .catch(err => {
+          if (seq !== loadSeq) return;
+          if (tryNo < 2 && apiReady) {
+            $('meterSrc').textContent = 'APIK sedang disiapkan, mencoba lagi...';
+            return loadSummary(false, tryNo + 1);
+          }
+          if (filled()) {
+            $('meterSrc').innerHTML = 'Menampilkan data terakhir.<button type="button" id="btnRefresh">Muat ulang</button>';
+            $('btnRefresh').addEventListener('click', () => loadSummary(true));
+            return;
+          }
+          if (C.showSummary !== false) summaryFailed(err.message);
+          renderNews(null, true);
+        });
+    }
+
+    const cached = readCache();
+    if (cached && cached.success) {
+      $('meter').dataset.filled = '1';
+      applyData(cached);
+      $('meterSrc').textContent = 'Menyegarkan data dari APIK...';
+    }
+
+    /* ---------- Panel SLA Gabungan (data dari aplikasi Dashboard SLA) ---------- */
+    const slaReady = C.slaUrl && !/GANTI_DENGAN/.test(C.slaUrl);
+    const SLA_CACHE = 'arekPortalSla';
+    const BULAN3 = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'];
+    const pct = v => (v === null || v === undefined || v === '' || isNaN(Number(v))) ? null : Number(v);
+    const fmtPct = v => Number(v).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '%';
+    const fmtNum = v => Math.round(Number(v) || 0).toLocaleString('id-ID');
+
+    function renderSla(d) {
+      const panel = $('slaPanel');
+      panel.classList.remove('loading');
+      const t = d.totals || {};
+      [['slaKontrak', t.kontrak], ['slaTagihan', t.tagihan], ['slaReward', t.reward], ['slaDenda', t.denda]].forEach(([id, v]) => {
+        $(id).innerHTML = '<small>Rp</small>' + fmtNum(v);
+        $(id).title = 'Rp ' + fmtNum(v);
       });
+      const year = d.year || new Date().getFullYear();
+      const prevYear = d.prevYear || (Number(year) - 1);
+      $('slaTitle').textContent = (d.title || 'SLA Gabungan Manbill UP 3 Jatim') + ' ' + year;
+      const months = Array.isArray(d.months) ? d.months : [];
+      $('slaMonths').innerHTML = BULAN3.map((n, i) => {
+        const m = months[i] || {};
+        const v = pct(m.sla), p = pct(m.prev);
+        const cls = v === null ? 'none' : v >= 100 ? 'good' : 'bad';
+        const arrow = v === null || p === null ? '' : (v >= p ? ' <span class="up" title="Naik dari tahun lalu">▲</span>' : ' <span class="down" title="Turun dari tahun lalu">▼</span>');
+        return `<div class="sla-m ${cls}"><div class="n">${n}</div><div class="v">${v === null ? '–' : fmtPct(v)}</div><div class="p">${p === null ? '&nbsp;' : fmtPct(p) + arrow}</div></div>`;
+      }).join('');
+      $('slaKomLbl').textContent = 'KOM TH ' + year;
+      $('slaKomPrevLbl').textContent = 'KOM TH ' + prevYear;
+      $('slaKom').textContent = pct(d.kom) === null ? '–' : fmtPct(d.kom);
+      $('slaKomPrev').textContent = pct(d.komPrev) === null ? '–' : fmtPct(d.komPrev);
+      const up = d.generatedAt ? new Date(d.generatedAt) : null;
+      $('slaNote').textContent = 'Angka kecil = bulan yang sama ' + prevYear + (up ? ' • diperbarui ' + pad2(up.getHours()) + ':' + pad2(up.getMinutes()) + ' WIB' : '');
+      $('slaMsg').style.display = 'none';
+    }
+
+    function loadSla(attempt) {
+      if (!slaReady) return;
+      const panel = $('slaPanel');
+      panel.hidden = false;
+      $('slaOpen').href = C.slaDashboardUrl || C.slaUrl;
+      let cachedSla = null;
+      try { cachedSla = JSON.parse(localStorage.getItem(SLA_CACHE) || 'null'); } catch (e) {}
+      if (cachedSla && cachedSla.success && !attempt) renderSla(cachedSla);
+      const ok = d => {
+        if (!d || !d.success) throw new Error(d && d.message ? d.message : 'respons tidak valid');
+        try { localStorage.setItem(SLA_CACHE, JSON.stringify(d)); } catch (e) {}
+        renderSla(d);
+      };
+      jsonp({ api: 'portal' }, 30000, d => { try { ok(d); } catch (e) {} }, C.slaUrl)
+        .then(ok)
+        .catch(err => {
+          if ((attempt || 1) < 2) return loadSla(2);
+          if (panel.classList.contains('loading')) {
+            panel.classList.remove('loading');
+            ['slaKontrak', 'slaTagihan', 'slaReward', 'slaDenda', 'slaKom', 'slaKomPrev'].forEach(id => { $(id).textContent = '--'; });
+            $('slaMonths').innerHTML = BULAN3.map(n => `<div class="sla-m none"><div class="n">${n}</div><div class="v">--</div><div class="p">&nbsp;</div></div>`).join('');
+          }
+          $('slaMsg').innerHTML = 'Data SLA belum dapat dimuat (' + esc(err.message) + '). <button type="button" id="slaRetry">Coba lagi</button>';
+          $('slaMsg').style.display = 'block';
+          $('slaRetry').addEventListener('click', () => { $('slaMsg').style.display = 'none'; loadSla(2); });
+        });
     }
 
     renderChips();
     renderApps();
-    renderHelp(null);
+    if (!cached) renderHelp(null);
     loadSummary(false);
+    loadSla();
   })();
   </script>
 </body>
