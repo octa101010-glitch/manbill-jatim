@@ -13,14 +13,14 @@ window.PORTAL_CONFIG = {
 
   // URL Web App APIK hasil Deploy (berakhiran /exec). Dipakai untuk membuka APIK
   // dan mengambil ringkasan, pengumuman, serta Buku Panduan.
-  apikUrl: "https://script.google.com/macros/s/AKfycbznQYPeTPP69sdv6k7mgob5RUvjS6gpmo-TpUN7VasUeIGzc3cS38uxAf8oAj5WM-LX/exec",
+  apikUrl: "https://script.google.com/macros/s/GANTI_DENGAN_ID_DEPLOYMENT/exec",
 
   // Tampilkan panel ringkasan APIK di halaman utama
   showSummary: true,
 
   // Panel "SLA Gabungan" di halaman utama: URL Web App Dashboard SLA (berakhiran /exec).
   // Kosongkan ("") untuk menyembunyikan panel.
-  slaUrl: "https://script.google.com/macros/s/AKfycbxWjInluikXFBM0HtNj8TW16H8cmVM9oA-rwRQcjd-D-1BJkFDH2pfcae3qVBCw5nlQ/exec",
+  slaUrl: "https://script.google.com/macros/s/GANTI_DENGAN_ID_DEPLOYMENT_SLA/exec",
   // Alamat yang dibuka tombol "Buka Dashboard SLA" (kosong = sama dengan slaUrl)
   slaDashboardUrl: "",
 
